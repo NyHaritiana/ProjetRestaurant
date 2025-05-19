@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>G_Resto</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/tailwind.min.css"/>
+        <link rel="stylesheet" href="../css/style.css"/>
+        <style>
+        /* Custom styles */
+        .blur-bg {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            min-width: 200px;
+            z-index: 50;
+        }
+        .portfolio-dropdown {
+            min-width: 90vw;
+            max-width: 1200px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        @media (max-width: 1024px) {
+            .portfolio-dropdown {
+                width: 95vw;
+            }
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+        input[type="time"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+        </style>
+    </head>
+    <body class="bg-gray-900 font-sans">
+    <div class="relative min-h-screen">
+        <header class="fixed top-0 left-0 right-0 bg-gray-800 transition-all duration-300 z-40 blur-bg shadow-lg">
+            <div class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a href="#" class="text-2xl font-bold text-blue-600">
+                            <img src="/api/placeholder/150/50" alt="Logo" class="h-10">
+                        </a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="lg:hidden block text-gray-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                            <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Menu -->
+                    <nav class="hidden lg:flex space-x-8 items-center">
+                        <!-- Accueil -->
+                        <div class="relative">
+                            <a href="../index.html" class="flex items-center text-gray-100 hover:text-blue-400 focus:outline-none">
+                                Accueil
+                            </a>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="relative">
+                            <a href="../menu/menu.html" class="flex items-center text-gray-100 hover:text-blue-400 focus:outline-none">
+                                Menu
+                            </a>
+                        </div>
+
+                        <!-- Réservation -->
+                        <div class="relative">
+                            <a class="flex items-center text-gray-100 hover:text-blue-400 focus:outline-none">
+                                Réservation
+                            </a>
+                        </div>
+
+                        <!-- Connexion -->
+                        <div class="relative">
+                            <a href="../admin/admin.html" class="flex items-center text-gray-100 font-bold bg-blue-500 px-4 py-2 rounded-3xl hover:text-blue-500 hover:bg-gray-200 focus:outline-none">
+                                Connexion
+                            </a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <main class='pt-16'>
+            <section>
+                <h1 class='text-white text-2xl text-center font-bold pt-6'>Réservation</h1>
+                <div class="mt-12 flex justify-center">
+                    <table>
+                        <tr>
+                            <td class="border py-2"><input type="date" id="datedereserve" name="datedereserve" class="bg-transparent text-gray-100 px-2"></td>
+                            <td class="border py-2"><input type="time" id="heuredereserve" name="heuredereserve" value="19:00" class="bg-transparent text-gray-100 px-2"></td>
+                            <td class="border py-2"><input type="text" placeholder="nom" id="nomcli" name="nomcli" class="bg-transparent text-gray-100 px-2 focus:outline-none focus:border-none focus:ring-0"></td>
+                            <td><button class="bg-blue-500 text-gray-100 mx-4 py-3 px-6 rounded hover:bg-blue-600">valider</button></td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="mx-24 my-12">
+                    <h1 class="text-white text-2xl font-bold">Les tables réservés</h1>
+                    <table class="w-full my-4">
+                        <thead class="border-b border-gray-500">
+                            <tr class="text-gray-100 text-xl text-left">
+                                <th class="font-semibold pb-4">Client</th>
+                                <th class="font-semibold pb-4">Tables</th>
+                                <th class="font-semibold pb-4">Date de réservation</th>
+                                <th class="font-semibold pb-4">Réservé le</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-100">
+                            <tr>
+                                <td class="py-4">Rabe</td>
+                                <td class="py-4">t-01</td>
+                                <td class="py-4">12/05/2025</td>
+                                <td class="py-4">01/06/2025</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4">Koto</td>
+                                <td class="py-4">t-02</td>
+                                <td class="py-4">12/05/2025</td>
+                                <td class="py-4">01/06/2025</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4">Lita</td>
+                                <td class="py-4">t-03</td>
+                                <td class="py-4">12/05/2025</td>
+                                <td class="py-4">01/06/2025</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4">Bema</td>
+                                <td class="py-4">t-04</td>
+                                <td class="py-4">12/05/2025</td>
+                                <td class="py-4">01/06/2025</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4">Voahangy</td>
+                                <td class="py-4">t-05</td>
+                                <td class="py-4">12/05/2025</td>
+                                <td class="py-4">01/06/2025</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4">Soa</td>
+                                <td class="py-4">t-06</td>
+                                <td class="py-4">12/05/2025</td>
+                                <td class="py-4">01/06/2025</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4">Rabe</td>
+                                <td class="py-4">t-07</td>
+                                <td class="py-4">12/05/2025</td>
+                                <td class="py-4"    >01/06/2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Additional initialization if needed
+        document.addEventListener('alpine:init', () => {
+            // Any additional Alpine.js initialization can go here
+        });
+    </script>
+</body>
+</html>

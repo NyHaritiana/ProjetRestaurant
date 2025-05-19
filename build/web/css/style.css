@@ -1,0 +1,16 @@
+.backg-section {
+    background-image: url('../images/pasta.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Cacher la scrollbar (fonctionne sur Chrome, Edge, Safari) */
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
