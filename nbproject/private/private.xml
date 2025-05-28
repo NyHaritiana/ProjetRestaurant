@@ -3,10 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ny%20Aina%20Haritiana/Documents/NetBeansProjects/ProjetRestaurant/web/menu/menu.html</file>
-            <file>file:/C:/Users/Ny%20Aina%20Haritiana/Documents/NetBeansProjects/ProjetRestaurant/web/index.html</file>
-            <file>file:/C:/Users/Ny%20Aina%20Haritiana/Documents/NetBeansProjects/ProjetRestaurant/web/admin/nouveauMenu.html</file>
-            <file>file:/C:/Users/Ny%20Aina%20Haritiana/Documents/NetBeansProjects/ProjetRestaurant/web/reservation/reservation.html</file>
+            <file>file:/C:/Users/Ny%20Aina%20Haritiana/Documents/NetBeansProjects/ProjetRestaurant/web/admin/table/ajoutTable.jsp</file>
+            <file>file:/C:/Users/Ny%20Aina%20Haritiana/Documents/NetBeansProjects/ProjetRestaurant/web/menu/menu.jsp</file>
+            <file>file:/C:/Users/Ny%20Aina%20Haritiana/Documents/NetBeansProjects/ProjetRestaurant/web/admin/cli/pdfClient.jsp</file>
+            <file>file:/C:/Users/Ny%20Aina%20Haritiana/Documents/NetBeansProjects/ProjetRestaurant/web/admin/table/nouveauTable.html</file>
+            <file>file:/C:/Users/Ny%20Aina%20Haritiana/Documents/NetBeansProjects/ProjetRestaurant/web/menu/validerCommande.jsp</file>
+            <file>file:/C:/Users/Ny%20Aina%20Haritiana/Documents/NetBeansProjects/ProjetRestaurant/web/admin/cli/listeClient.jsp</file>
+            <file>file:/C:/Users/Ny%20Aina%20Haritiana/Documents/NetBeansProjects/ProjetRestaurant/web/admin/menuadmin/ajoutMenu.jsp</file>
+            <file>file:/C:/Users/Ny%20Aina%20Haritiana/Documents/NetBeansProjects/ProjetRestaurant/web/admin/menuadmin/nouveauMenu.html</file>
+            <file>file:/C:/Users/Ny%20Aina%20Haritiana/Documents/NetBeansProjects/ProjetRestaurant/web/admin/admin.jsp</file>
         </group>
     </open-files>
 </project-private>
