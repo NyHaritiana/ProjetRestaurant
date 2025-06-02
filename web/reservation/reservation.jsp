@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*" %>
+<%@page import="java.util.*" %>
+<%@page import="org.json.*" %>
 <%@page import="util.connectionDB" %>
 
 <!DOCTYPE html>
@@ -66,10 +68,11 @@
             <div class="container mx-auto px-4 py-3">
                 <div class="flex justify-between items-center">
                     <!-- Logo -->
-                    <div class="flex-shrink-0">
+                    <div class="flex">
                         <a href="#" class="text-2xl font-bold text-blue-600">
-                            <img src="/api/placeholder/150/50" alt="Logo" class="h-10">
+                            <img src="../images/gresto.png" alt="Logo" class="h-10">
                         </a>
+                        <h1 class="text-3xl font-bold px-4 text-white">G_RESTO</h1>
                     </div>
 
                     <!-- Mobile Menu Button -->
@@ -127,7 +130,7 @@
                                         String currentTableId = request.getParameter("idtable"); // récupère l'id de la table en cours de modification
                                         Connection conn = connectionDB.getConnection();
                                         if(conn != null){
-                                            String sql = "SELECT * FROM \"TABLE\" WHERE idtable NOT IN (SELECT idtable FROM \"RESERVER\")";
+                                            String sql = "SELECT * FROM \"TABLE\" ORDER BY idtable ASC";
                                             if (currentTableId != null && !currentTableId.isEmpty()) {
                                                 sql += " OR idtable = ?";
                                             }
@@ -143,7 +146,7 @@
                                         <%
                                             while(rs.next()){
                                         %>
-                                        <option class="text-gray-800"><%=rs.getString("idtable")%></option>
+                                        <option value="<%=rs.getString("idtable")%>" class="text-gray-800"><%=rs.getString("idtable")%></option>
                                         <% } %>
                                     </select> 
                                  <%
@@ -155,15 +158,32 @@
                                     }
                                 %>
                             </td>
+                            <%
+                                List<String> dateExistantes = new ArrayList<>();
+                                Connection connx = connectionDB.getConnection();
+                                if(connx != null){
+                                    String psql = "SELECT datereserv FROM \"RESERVER\"";
+                                    PreparedStatement pst = connx.prepareStatement(psql);
+                                    ResultSet rst = pst.executeQuery();
+                                    while(rst.next()){
+                                        Timestamp ts = rst.getTimestamp("datereserv");
+                                        String iso = ts.toLocalDateTime().toString().substring(0,6);
+                                        dateExistantes.add(iso);
+                                    }
+                                } else {
+                                    out.println("Connexion echouee");
+                                }
+                            %>
                             <td class="border py-2">
                                 <input type="datetime-local" id="datereserve" name="datereserv" class="bg-transparent text-gray-100 px-2 focus:outline-none focus:border-none focus:ring-0" required>
                             </td>
+                            <small id="dateError" class="text-red-500 hidden">Cette date est déjà prise.</small>
                             <td class="border py-2"><input type="text" placeholder="votre nom" id="nomcli" name="nomcli" class="bg-transparent text-gray-100 px-2 focus:outline-none focus:border-none focus:ring-0" required></td>
                             <td>
                                 <input type="hidden" id="idreserv" name="idreserv">
                                 <input type="hidden" id="currentTableId" name="idtable">
                             </td>
-                            <td><button type="submit" class="bg-blue-500 text-gray-100 mx-4 py-3 px-6 rounded hover:bg-blue-600">valider</button></td>
+                            <td><button id="submitBtn" type="submit" class="bg-blue-500 text-gray-100 mx-4 py-3 px-6 rounded hover:bg-blue-600">valider</button></td>
                         </tr>
                     </table>
                    </form>
@@ -211,6 +231,7 @@
                                     Modifier
                                   </button>
                                 </td>
+                                <td class="py-4"><a href="../menu/menu.jsp?id=<%= rs.getString("idtable")%>&nom=<%= rs.getString("nomcli").replace("'", "\\'")%>&idreserv=<%= rs.getInt("idreserv") %>" class="px-4 py-2 text-white bg-transparent rounded-md focus:outline-none transition duration-150 ease-in-out">commander</a></td>
                             </tr>
                             <% } %>
                         </tbody>
@@ -286,6 +307,26 @@
 
           const datetimeInput = document.getElementById("datereserve");
           datetimeInput.min = getCurrentDateTimeLocal();
+          
+          
+          const datesPrises = <%= new org.json.JSONArray(dateExistantes).toString() %>;
+
+        const inputDate = document.getElementById("datereserve");
+        const errorText = document.getElementById("dateError");
+        const submitBtn = document.getElementById("submitBtn");
+
+        inputDate.addEventListener("change", () => {
+            const selected = inputDate.value;
+            if (datesPrises.includes(selected)) {
+                errorText.classList.remove("hidden");
+                inputDate.setCustomValidity("Cette date est déjà prise.");
+                submitBtn.disabled = true;
+            } else {
+                errorText.classList.add("hidden");
+                inputDate.setCustomValidity("");
+                submitBtn.disabled = false;
+            }
+        });
     </script>
 </body>
 </html>

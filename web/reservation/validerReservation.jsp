@@ -32,9 +32,10 @@
             message = "Rerervation confirmée !";
         } catch(Exception e){
             out.println("Erreur : " + e.getMessage());
+            message = "Cette table est deja prise pour cette date";
         }
     } else {
-        out.println("Connexion échouée");
+        message = "Cette table est deja prise pour cette date";
     }
 %>
 

@@ -6,6 +6,8 @@
     String datereserv = request.getParameter("datereserv");
     String idtable = request.getParameter("idtable");
     String nomcli = request.getParameter("nomcli");
+    boolean success = false;
+    String message = "";
 
     if (datereserv != null && datereserv.contains("T")) {
         datereserv = datereserv.replace("T", " ") + ":00";
@@ -20,7 +22,8 @@
             ps.setString(3, nomcli);
             ps.setInt(4, Integer.parseInt(idreserv));
             ps.executeUpdate();
-            out.println("Modification reussie !");
+            success = true;
+            message = "Modification reussie !";
         } else {
             out.println("Champs manquants ou connexion échouee.");
         }
@@ -28,3 +31,12 @@
         out.println("Erreur: " + e.getMessage());
     }
 %>
+
+<script>
+    alert("<%= message.replace("\"", "\\\"") %>");
+    <% if(success) { %>
+        window.location.href = "./reservation.jsp?reset=true";
+    <% } else { %>
+        window.history.back();
+    <% } %>
+</script>

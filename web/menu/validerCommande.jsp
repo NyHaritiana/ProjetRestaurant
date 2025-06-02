@@ -8,6 +8,7 @@
     String nomcli = request.getParameter("nomcli");
     String datecom = request.getParameter("datecom");
     String idtable = request.getParameter("idtable");
+    String idreserv = request.getParameter("idreserv");
     boolean success = false;
     String message = "";
 
@@ -28,6 +29,14 @@
                 ps.setString(5, idtable);
                 ps.setDate(6, Date.valueOf(datecom));
                 ps.executeUpdate();
+                
+                if (idreserv != null && !idreserv.isEmpty()) {
+                String deleteRes = "DELETE FROM \"RESERVER\" WHERE idreserv = ?";
+                ps = conn.prepareStatement(deleteRes);
+                ps.setInt(1, Integer.parseInt(idreserv));
+                ps.executeUpdate();
+                ps.close();
+            }
                 success = true;
                 message = "Commande ajoutée avec succès !";
             }

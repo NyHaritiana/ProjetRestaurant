@@ -29,8 +29,9 @@
         <!-- Sidebar -->
         <aside class="fixed inset-y-0 left-0 z-50 w-64 bg-gray-800 transform transition-transform duration-300 ease-in-out md:translate-x-0"
                :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen }">
-            <div class="flex items-center justify-between h-16 px-4 bg-gray-900">
-                <span class="text-white text-lg font-bold">Superadmin</span>
+            <div class="flex items-center h-16 px-4 bg-gray-900">
+                <img src="../images/gresto.png" alt="Logo" class="h-10">
+                <span class="text-white text-lg font-bold mx-2">Superadmin</span>
             </div>
             <nav class="overflow-y-auto h-[calc(100vh-4rem)]">
                 <a href="#" class="flex border-b border-gray-900/10 items-center px-4 py-2 text-gray-100 hover:bg-gray-700">

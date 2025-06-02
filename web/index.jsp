@@ -67,10 +67,11 @@
             <div class="container mx-auto px-4 py-3">
                 <div class="flex justify-between items-center">
                     <!-- Logo -->
-                    <div class="flex-shrink-0">
+                    <div class="flex">
                         <a href="#" class="text-2xl font-bold text-blue-600">
-                            <img src="/api/placeholder/150/50" alt="Logo" class="h-10">
+                            <img src="images/gresto.png" alt="Logo" class="h-10">
                         </a>
+                        <h1 class="text-3xl font-bold px-4 text-white">G_RESTO</h1>
                     </div>
 
                     <!-- Menu -->
@@ -119,7 +120,7 @@
                   <p class="text-xl text-gray-200 mb-8">
                     Ne tardez plus! Vous pouvez réserver votre table dès maintenant.
                   </p>
-                  <a href="./reservation/reservation.html" class="inline-block px-8 py-3 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-800 transition-colors">
+                  <a href="./reservation/reservation.jsp" class="inline-block px-8 py-3 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-800 transition-colors">
                     Réserver votre table
                   </a>
                 </div>
@@ -142,10 +143,10 @@
                             try{
                                 Connection conn = connectionDB.getConnection();
                                 if(conn != null){
-                                    String sql = "SELECT M.nomplat, M.pu, SUM(C.unite) AS total_vendu " +
-                                            "FROM \"MENU\" M " +
-                                            "LEFT JOIN \"COMMANDE\" C ON C.idplat = M.idplat " +
-                                            "GROUP BY M.nomplat, M.pu " +
+                                    String sql = "SELECT M.nomplat, M.pu, COALESCE(SUM(C.unite), 0) AS total_vendu " +
+                                            "FROM \"COMMANDE\" C " +
+                                            "JOIN \"MENU\" M ON C.idplat = M.idplat " +
+                                            "GROUP BY M.idplat, M.nomplat, M.pu " +
                                             "ORDER BY total_vendu DESC " +
                                             "LIMIT 10";
                                     PreparedStatement ps = conn.prepareStatement(sql);
@@ -242,7 +243,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <!-- Company Info -->
                     <div>
-                        <img src="/api/placeholder/150/50" alt="Logo" class="h-8 mb-4">
+                        <img src="images/gresto.png" alt="Logo" class="h-8 mb-4">
                         <p class="text-gray-400 mb-4">Creating beautiful spaces since 2010. Our award-winning design team is dedicated to bringing your vision to life.</p>
                         <div class="flex space-x-4">
                             <a href="#" class="text-gray-400 hover:text-white transition-colors">
